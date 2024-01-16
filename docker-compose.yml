@@ -1,0 +1,30 @@
+version: '3'
+services:
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "5050:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=scout@bfc.com
+      - PGADMIN_DEFAULT_PASSWORD=mesqueunclub
+
+  python_app:
+    build:
+      context: .
+    volumes:
+      - ./Scrapping.py:/app/Scrapping.py
+      - ./data:/app/data
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USER=scout_barcelona
+      - POSTGRES_PASSWORD=mesqueunclub
+      - POSTGRES_DB=tabla_jugadores
+
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=scout_barcelona
+      - POSTGRES_PASSWORD=mesqueunclub
+      - POSTGRES_DB=tabla_jugadores
+    depends_on:
+      - python_app
