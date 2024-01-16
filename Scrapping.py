@@ -10,7 +10,7 @@ pip install mysql-connector-python
 pip install plotly
 
 
-# Se importan las librerías necesarias
+# Se importan las librerías necesarias (prueba)
 import requests
 from bs4 import BeautifulSoup as Soup
 import numpy as np
